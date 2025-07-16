@@ -76,3 +76,9 @@ ScriptsTab:CreateButton({
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Touch-fling-41998"))()
     end,
 })
+ScriptsTab:CreateButton({
+    Name = "ماب السرقه 2",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Gregy677/Gunmods-strucid/main/Steal%20a%20brain%20rot", true))()
+    end,
+})
