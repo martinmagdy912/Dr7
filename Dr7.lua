@@ -1,29 +1,29 @@
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
 local Window = Rayfield:CreateWindow({
-   Name = "DR7 MARTIN",
-   LoadingTitle = "جاري التحميل...",
-   LoadingSubtitle = "By DR7",
-   ConfigurationSaving = {
-      Enabled = true,
-      FolderName = nil,
-      FileName = "DR7Settings"
-   },
-   Discord = {
-      Enabled = false,
-      Invite = "",
-      RememberJoins = false
-   },
-   KeySystem = true,
-   KeySettings = {
-      Title = "DR7 MARTIN",
-      Subtitle = "أدخل المفتاح لتشغيل السكربتات",
-      Note = "FOLLOW MY ACCOUNT:martinmoka5nd",
-      FileName = "DR7Key",
-      SaveKey = true,
-      GrabKeyFromSite = false,
-      Key = {"DR7SCRIPTS"}
-   }
+    Name = "DR7 MARTIN",
+    LoadingTitle = "جارٍ التحميل...",
+    LoadingSubtitle = "By DR7",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = nil,
+        FileName = "DR7Settings"
+    },
+    Discord = {
+        Enabled = false,
+        Invite = "",
+        RememberJoins = false
+    },
+    KeySystem = true,
+    KeySettings = {
+        Title = "DR7 MARTIN",
+        Subtitle = "أدخل المفتاح لتشغيل السكربتات",
+        Note = "🎯 صانع السكربت: مارتن\n📌 تابع حسابي: martinmoka5nd",
+        FileName = "DR7Key",
+        SaveKey = false,
+        GrabKeyFromSite = false,
+        Key = {"DR7"}
+    }
 })
 
 local ScriptsTab = Window:CreateTab("سكربتات DR7", 4483362458)
@@ -64,17 +64,15 @@ ScriptsTab:CreateButton({
 })
 
 ScriptsTab:CreateButton({
-    Name = "سكربت طيران",
+    Name = "طيران",
     Callback = function()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-FLY-MOBILE-SCRIPT-23875"))()
     end,
 })
 
 ScriptsTab:CreateButton({
-    Name = "سكربت فلينق",
+    Name = "فلينق",
     Callback = function()
         loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Touch-fling-41998"))()
     end,
 })
-
-Rayfield:LoadConfiguration()
