@@ -1,141 +1,82 @@
--- ✅ تحميل مكتبة Rayfield (الإصدار الجديد)
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+-- زر لفتح و إغلاق الواجهة
+local Button = Instance.new("ImageButton")
+Button.Image = "rbxassetid://14441019536" -- الصورة اللي انت بعتها
+Button.Size = UDim2.new(0, 60, 0, 60)
+Button.Position = UDim2.new(0, 10, 0.4, 0)
+Button.BackgroundTransparency = 1
+Button.ZIndex = 1000
+Button.Parent = game.CoreGui
 
--- ✅ إنشاء الواجهة الرئيسية بدون KeySystem
-local Window = Rayfield:CreateWindow({
-    Name = "DR7 MARTIN",
-    LoadingTitle = "جارٍ التحميل...",
-    LoadingSubtitle = "By DR7",
-    Theme = "Ocean",
-    ShowText = "DR7 MENU",
-    ToggleUIKeybind = "K",
-    ConfigurationSaving = {
-        Enabled = true,
-        FileName = "DR7Settings"
+-- الواجهة الرئيسية
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
+ScreenGui.Name = "Dr7GUI"
+ScreenGui.Enabled = false
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Size = UDim2.new(0, 500, 0, 300)
+MainFrame.Position = UDim2.new(0.5, -250, 0.5, -150)
+MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+MainFrame.Visible = true
+MainFrame.Parent = ScreenGui
+
+-- UIGrid لتابز عمودي
+local TabList = Instance.new("UIListLayout")
+TabList.FillDirection = Enum.FillDirection.Vertical
+TabList.SortOrder = Enum.SortOrder.LayoutOrder
+TabList.Padding = UDim.new(0, 5)
+TabList.Parent = MainFrame
+
+-- جدول التابز و السكربتات
+local tabs = {
+    ["القتال"] = {
+        {"Aimbot", "https://rawscripts.net/raw/Universal-Script-Aimbot-10371"},
+        {"ESP", "https://rawscripts.net/raw/Universal-Script-ESP-5749"}
+    },
+    ["السرقه"] = {
+        {"Rob All", "https://rawscripts.net/raw/Brookhaven-Rob-All-10612"}
+    },
+    ["بروكهافن"] = {
+        {"تخفي", "https://rawscripts.net/raw/Brookhaven-Invisible-6902"},
+        {"سرقة السيارات", "https://rawscripts.net/raw/Brookhaven-Car-Steal-10484"}
+    },
+    ["تحكم"] = {
+        {"طيران", "https://rawscripts.net/raw/Universal-Script-Fly-GUI-10665"},
+        {"فلينق", "https://rawscripts.net/raw/Universal-Script-Fling-GUI-10989"},
+        {"وول هوب", "https://rawscripts.net/raw/Universal-Script-wallhop-42706"}
     }
-})
+}
 
--- ✅ تبويب: القتال
-local MainTab = Window:CreateTab("القتال", "swords")
-MainTab:CreateButton({
-    Name = "Murder vs Sheriff Duel",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/main/TbaoHubMurdervssheriff"))()
-    end
-})
+-- إنشاء التابز و الأزرار
+for tabName, scripts in pairs(tabs) do
+    local tabLabel = Instance.new("TextLabel")
+    tabLabel.Text = "— " .. tabName .. " —"
+    tabLabel.Size = UDim2.new(1, -20, 0, 30)
+    tabLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    tabLabel.BackgroundTransparency = 1
+    tabLabel.Font = Enum.Font.SourceSansBold
+    tabLabel.TextSize = 20
+    tabLabel.Parent = MainFrame
 
--- ✅ تبويب: السرقة
-local RobberyTab = Window:CreateTab("السرقه", "briefcase")
-RobberyTab:CreateButton({
-    Name = "ماب السرقه",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/DoliScriptz/loader/refs/heads/main/main.lua"))()
-    end
-})
-RobberyTab:CreateButton({
-    Name = "ماب السرقه 2",
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Gregy677/Gunmods-strucid/main/Steal%20a%20brain%20rot"))()
-    end
-})
+    for _, scriptData in pairs(scripts) do
+        local name, url = scriptData[1], scriptData[2]
+        local button = Instance.new("TextButton")
+        button.Text = name
+        button.Size = UDim2.new(1, -20, 0, 30)
+        button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        button.TextColor3 = Color3.fromRGB(255, 255, 255)
+        button.Font = Enum.Font.SourceSans
+        button.TextSize = 18
+        button.Parent = MainFrame
 
--- ✅ تبويب: بروكهافن
-local HousesTab = Window:CreateTab("بروكهافن", "building")
-HousesTab:CreateButton({
-    Name = "ماب البيوت مارتن",
-    Callback = function()
-        loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-MARTIN-IRAQ-31476"))()
+        button.MouseButton1Click:Connect(function()
+            pcall(function()
+                loadstring(game:HttpGet(url))()
+            end)
+        end)
     end
-})
-HousesTab:CreateButton({
-    Name = "ماب البيوت الفا",
-    Callback = function()
-        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-ALFA-IRAQ-34036"))()
-    end
-})
-HousesTab:CreateButton({
-    Name = "ماب البيوت خليفه",
-    Callback = function()
-        loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-MS13-IRAQ-44980"))()
-    end
-})
+end
 
--- ✅ تبويب: تحكم
-local MovementTab = Window:CreateTab("تحكم", "move")
-MovementTab:CreateButton({
-    Name = "طيران",
-    Callback = function()
-        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-FLY-MOBILE-SCRIPT-23875"))()
-    end
-})
-MovementTab:CreateButton({
-    Name = "فلينق",
-    Callback = function()
-        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Touch-fling-41998"))()
-    end
-})
-
--- التحكم في اللاعب
-local Player = game.Players.LocalPlayer
-local Character = Player.Character or Player.CharacterAdded:Wait()
-local Humanoid = Character:WaitForChild("Humanoid")
-
--- السرعة
-local speedValue = 16
-MovementTab:CreateInput({
-    Name = "تحديد السرعة (1 - 200)",
-    PlaceholderText = "اكتب السرعة هنا",
-    RemoveTextAfterFocusLost = false,
-    Callback = function(text)
-        speedValue = tonumber(text) or 16
-    end
-})
-MovementTab:CreateToggle({
-    Name = "تشغيل / إيقاف السرعة",
-    CurrentValue = false,
-    Callback = function(state)
-        if state then Humanoid.WalkSpeed = math.clamp(speedValue, 1, 200)
-        else Humanoid.WalkSpeed = 16 end
-    end
-})
-
--- النط
-local jumpValue = 50
-MovementTab:CreateInput({
-    Name = "تحديد قوة النط (1 - 500)",
-    PlaceholderText = "اكتب قوة النط هنا",
-    RemoveTextAfterFocusLost = false,
-    Callback = function(text)
-        jumpValue = tonumber(text) or 50
-    end
-})
-MovementTab:CreateToggle({
-    Name = "تشغيل / إيقاف قوة النط",
-    CurrentValue = false,
-    Callback = function(state)
-        if state then Humanoid.JumpPower = math.clamp(jumpValue, 1, 500)
-        else Humanoid.JumpPower = 50 end
-    end
-})
-
--- الجاذبية
-local gravityValue = 196.2
-MovementTab:CreateInput({
-    Name = "تحديد الجاذبية (0 - 200)",
-    PlaceholderText = "اكتب الجاذبية هنا",
-    RemoveTextAfterFocusLost = false,
-    Callback = function(text)
-        gravityValue = tonumber(text) or 196.2
-    end
-})
-MovementTab:CreateToggle({
-    Name = "تشغيل / إيقاف الجاذبية",
-    CurrentValue = false,
-    Callback = function(state)
-        if state then game.Workspace.Gravity = math.clamp(gravityValue, 0, 200)
-        else game.Workspace.Gravity = 196.2 end
-    end
-})
-
--- ✅ تحميل الإعدادات المحفوظة
-Rayfield:LoadConfiguration()
+-- إظهار/إخفاء الواجهة عند الضغط على الزر
+Button.MouseButton1Click:Connect(function()
+    ScreenGui.Enabled = not ScreenGui.Enabled
+end)
