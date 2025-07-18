@@ -102,3 +102,24 @@ Callback = function()
 loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Fe-emotes-15813"))()
 end,
 })
+
+-- زر الفتح والإغلاق (أحمر مربع)
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 50, 0, 50)
+button.Position = UDim2.new(0, 10, 0.5, -25)
+button.Text = ""
+button.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+button.TextColor3 = Color3.new(1, 1, 1)
+button.BorderSizePixel = 0
+button.BackgroundTransparency = 0
+button.Name = "ToggleUI"
+button.Parent = game:GetService("CoreGui")
+button.AutoButtonColor = true
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(1, 0)
+corner.Parent = button
+
+button.MouseButton1Click:Connect(function()
+Rayfield:Toggle()
+end)
